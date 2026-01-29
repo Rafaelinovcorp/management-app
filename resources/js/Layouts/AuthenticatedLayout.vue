@@ -43,10 +43,17 @@ const user = computed(() => page.props.auth?.user ?? null)
                                 </NavLink>
 
                                 <NavLink
-                                    :href="route('clientes.index')"
-                                    :active="route().current('clientes.*')"
+                                    :href="route('entidades.index')"
+                                    :active="route().current('entidades.*')"
                                 >
-                                    Clientes
+                                    Entidades
+                                </NavLink>
+
+                                <NavLink
+                                    :href="route('contactos.index')"
+                                    :active="route().current('contactos.*')"
+                                >
+                                    Contactos
                                 </NavLink>
                             </div>
                         </div>
@@ -150,12 +157,19 @@ const user = computed(() => page.props.auth?.user ?? null)
                             Dashboard
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink
-                            :href="route('clientes.index')"
-                            :active="route().current('clientes.*')"
+                        <NavLink
+                            :href="route('entidades.index')"
+                            :active="route().current('entidades.*')"
                         >
-                            Clientes
-                        </ResponsiveNavLink>
+                            Entidades
+                        </NavLink>
+
+                        <NavLink
+                            :href="route('contactos.index')"
+                            :active="route().current('contactos.*')"
+                        >
+                            Contactos
+                        </NavLink>
                     </div>
 
                     <div

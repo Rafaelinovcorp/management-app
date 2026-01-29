@@ -21,6 +21,10 @@ defineProps({
     type: Array,
     required: true,
   },
+  columns: {
+    type: Array,
+    required: true,
+  },
 })
 
 const emit = defineEmits(['edit', 'delete'])
@@ -31,18 +35,30 @@ const emit = defineEmits(['edit', 'delete'])
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>NIF</TableHead>
-          <TableHead>Nome</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead class="text-right">Ações</TableHead>
+          <TableHead
+            v-for="col in columns"
+            :key="col.label"
+          >
+            {{ col.label }}
+          </TableHead>
+
+          <TableHead class="text-right">
+            Ações
+          </TableHead>
         </TableRow>
       </TableHeader>
 
       <TableBody>
-        <TableRow v-for="item in items" :key="item.id">
-          <TableCell>{{ item.nif }}</TableCell>
-          <TableCell>{{ item.nome }}</TableCell>
-          <TableCell>{{ item.email }}</TableCell>
+        <TableRow
+          v-for="item in items"
+          :key="item.id"
+        >
+          <TableCell
+            v-for="col in columns"
+            :key="col.label"
+          >
+            {{ col.value(item) }}
+          </TableCell>
 
           <TableCell class="text-right">
             <DropdownMenu>
