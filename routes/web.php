@@ -3,11 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EntidadesController;
 use App\Http\Controllers\ContactosController;
+use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ViesController;
 use App\Http\Controllers\ContactoFuncaoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaSettingController;
+use App\Http\Controllers\ArtigoController;
+
 use App\Models\EmpresaSetting;
 use Inertia\Inertia;
 
@@ -124,4 +127,38 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/configuracoes/empresa', [EmpresaSettingController::class, 'update'])
         ->name('empresa.update');
+
+    //artigos
+    Route::get('/artigos', [ArtigoController::class, 'index'])
+        ->name('artigos.index');
+    Route::get('/artigos/create', [ArtigoController::class, 'create'])
+        ->name('artigos.create');
+    Route::post('/artigos', [ArtigoController::class, 'store'])
+        ->name('artigos.store');
+    Route::get('/artigos/{artigo}/edit', [ArtigoController::class, 'edit'])
+        ->name('artigos.edit');
+    Route::put('/artigos/{artigo}', [ArtigoController::class, 'update'])
+        ->name('artigos.update');
+    Route::delete('/artigos/{artigo}', [ArtigoController::class, 'destroy'])
+        ->name('artigos.destroy');
+
+    //IVa
+    Route::get('/configuracoes/iva', [IvaController::class, 'index'])
+      ->name('iva.index');
+
+    Route::get('/configuracoes/iva/create', [IvaController::class, 'create'])
+        ->name('iva.create');
+
+    Route::post('/configuracoes/iva', [IvaController::class, 'store'])
+        ->name('iva.store');
+
+    Route::get('/configuracoes/iva/{iva}/edit', [IvaController::class, 'edit'])
+        ->name('iva.edit');
+
+    Route::put('/configuracoes/iva/{iva}', [IvaController::class, 'update'])
+        ->name('iva.update');
+
+    Route::delete('/configuracoes/iva/{iva}', [IvaController::class, 'destroy'])
+        ->name('iva.destroy');
+
 });
