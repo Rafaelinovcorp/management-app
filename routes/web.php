@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactosController;
 use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ViesController;
 use App\Http\Controllers\ContactoFuncaoController;
+use App\Http\Controllers\PropostasController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaSettingController;
@@ -160,5 +161,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/configuracoes/iva/{iva}', [IvaController::class, 'destroy'])
         ->name('iva.destroy');
+
+    //propostas
+     Route::resource('propostas', PropostasController::class);
+
+    Route::post('propostas/{id}/linhas', [PropostasController::class, 'addLinha'])
+        ->name('propostas.linhas.add');
+
+    Route::delete('propostas/linhas/{id}', [PropostasController::class, 'removeLinha'])
+        ->name('propostas.linhas.remove');
+
+    Route::post('propostas/{id}/fechar', [PropostasController::class, 'fechar'])
+        ->name('propostas.fechar');
+
+        
+    //dowload
+    Route::get('propostas/{id}/pdf', [PropostasController::class, 'pdf'])
+        ->name('propostas.pdf');
+
+    //converter para ecomenda
+    Route::post(
+    'propostas/{id}/converter-encomenda',
+    [PropostasController::class, 'converterEmEncomenda']
+        )->name('propostas.converter.encomenda');
+
 
 });

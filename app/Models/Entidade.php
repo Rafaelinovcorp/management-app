@@ -32,7 +32,7 @@ class Entidade extends Model
         'is_fornecedor' => 'boolean',
         'rgpd' => 'boolean',
 
-        // encrypted
+     
         'morada' => 'encrypted',
         'codigo_postal' => 'encrypted',
         'localidade' => 'encrypted',
@@ -41,4 +41,15 @@ class Entidade extends Model
         'email' => 'encrypted',
         'observacoes' => 'encrypted',
     ];
+
+    public function scopeClientes($query)
+    {
+        return $query->where('is_cliente', true);
+    }
+    
+    public function scopeFornecedores($query)
+    {
+        return $query->where('is_fornecedor', true);
+    }
+
 }

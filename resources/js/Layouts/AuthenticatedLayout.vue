@@ -62,6 +62,13 @@ const user = computed(() => page.props.auth?.user ?? null)
                                 >
                                   Artigos
                                 </NavLink>
+
+                                <NavLink
+                                  :href="route('propostas.index')"
+                                  :active="route().current('propostas.*')"
+                                >
+                                  Propostas
+                                </NavLink>
                             </div>
                         </div>
 
@@ -185,6 +192,12 @@ const user = computed(() => page.props.auth?.user ?? null)
                           Artigos
                         </NavLink>
 
+                        <NavLink
+                          :href="route('propostas.index')"
+                          :active="route().current('propostas.*')"
+                        >
+                          Propostas
+                        </NavLink>
 
                     </div>
 
