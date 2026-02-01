@@ -69,6 +69,14 @@ const user = computed(() => page.props.auth?.user ?? null)
                                 >
                                   Propostas
                                 </NavLink>
+
+                                <NavLink
+                                  :href="route('encomendas.index')"
+                                  :active="route().current('encomendas.*')"
+                                >
+                                  Encomendas
+                                </NavLink>
+
                             </div>
                         </div>
 

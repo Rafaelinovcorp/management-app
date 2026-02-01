@@ -210,28 +210,35 @@ class PropostasController extends Controller
 
             $numero = Encomenda::max('numero') + 1;
 
-            $encomenda = Encomenda::create([
-                'numero' => $numero,
-                'cliente_id' => $proposta->cliente_id,
-                'estado' => 'rascunho',
-                'total' => 0,
-            ]);
+                $encomenda = Encomenda::create([
+                    'numero' => $numero,
+                    'data' => now(),
+                    'entidade_id' => $proposta->cliente_id,
+                    'estado' => 'Rascunho',
+                    'proposta_id' => $proposta->id,
+                ]);
+
+
 
             foreach ($proposta->linhas as $linha) {
+                $subtotal = $linha->quantidade * $linha->preco_unitario;
+                $ivaValor = ($subtotal * $linha->iva_percentagem) / 100;
+
                 $novaLinha = new EncomendaLinha([
                     'artigo_id' => $linha->artigo_id,
                     'fornecedor_id' => $linha->fornecedor_id,
                     'quantidade' => $linha->quantidade,
                     'preco_unitario' => $linha->preco_unitario,
                     'iva_percentagem' => $linha->iva_percentagem,
-                    'subtotal' => $linha->subtotal,
-                    'total' => $linha->total,
+                    'iva_valor' => $ivaValor,
+                    'preco_total' => $subtotal + $ivaValor,
                 ]);
 
                 $encomenda->linhas()->save($novaLinha);
+
             }
 
-            $encomenda->recalcularTotais();
+            $encomenda->recalcularTotal();
 
             return redirect()->route('encomendas.edit', $encomenda->id);
         });   

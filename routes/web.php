@@ -7,6 +7,7 @@ use App\Http\Controllers\IvaController;
 use App\Http\Controllers\ViesController;
 use App\Http\Controllers\ContactoFuncaoController;
 use App\Http\Controllers\PropostasController;
+use App\Http\Controllers\EncomendaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaSettingController;
@@ -184,6 +185,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     'propostas/{id}/converter-encomenda',
     [PropostasController::class, 'converterEmEncomenda']
         )->name('propostas.converter.encomenda');
+
+    // Encomendas (Clientes)
+    Route::get('/encomendas', [EncomendaController::class, 'index'])
+        ->name('encomendas.index');
+    
+    Route::get('/encomendas/create', [EncomendaController::class, 'create'])
+        ->name('encomendas.create');
+    
+    Route::post('/encomendas', [EncomendaController::class, 'store'])
+        ->name('encomendas.store');
+    
+    Route::get('/encomendas/{encomenda}/edit', [EncomendaController::class, 'edit'])
+        ->name('encomendas.edit');
+    
+    Route::put('/encomendas/{encomenda}', [EncomendaController::class, 'update'])
+        ->name('encomendas.update');
+    
+    Route::delete('/encomendas/{encomenda}', [EncomendaController::class, 'destroy'])
+        ->name('encomendas.destroy');
+    // PDF Encomenda
+Route::get('encomendas/{encomenda}/pdf', [EncomendaController::class, 'pdf'])
+    ->name('encomendas.pdf');
+
 
 
 });
