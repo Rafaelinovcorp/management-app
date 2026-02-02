@@ -77,6 +77,14 @@ const user = computed(() => page.props.auth?.user ?? null)
                                   Encomendas
                                 </NavLink>
 
+                                <NavLink
+                                  :href="route('faturas-fornecedor.index')"
+                                  :active="route().current('faturas-fornecedor.*')"
+                                >
+                                  Faturas Fornecedor
+                                </NavLink>
+
+
                             </div>
                         </div>
 

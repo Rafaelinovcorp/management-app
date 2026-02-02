@@ -12,6 +12,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpresaSettingController;
 use App\Http\Controllers\ArtigoController;
+use App\Http\Controllers\FaturaFornecedorController;
 
 use App\Models\EmpresaSetting;
 use Inertia\Inertia;
@@ -208,6 +209,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('encomendas/{encomenda}/pdf', [EncomendaController::class, 'pdf'])
     ->name('encomendas.pdf');
 
+    //faturas
+    
+Route::get('/financas/faturas-fornecedor', [FaturaFornecedorController::class, 'index'])
+    ->name('faturas-fornecedor.index');
+
+Route::get('/financas/faturas-fornecedor/create', [FaturaFornecedorController::class, 'create'])
+    ->name('faturas-fornecedor.create');
+
+Route::post('/financas/faturas-fornecedor', [FaturaFornecedorController::class, 'store'])
+    ->name('faturas-fornecedor.store');
+
+Route::get('/financas/faturas-fornecedor/{fatura}/edit', [FaturaFornecedorController::class, 'edit'])
+    ->name('faturas-fornecedor.edit');
+
+Route::put('/financas/faturas-fornecedor/{fatura}', [FaturaFornecedorController::class, 'update'])
+    ->name('faturas-fornecedor.update');
+
+Route::delete('/financas/faturas-fornecedor/{fatura}', [FaturaFornecedorController::class, 'destroy'])
+    ->name('faturas-fornecedor.destroy');
+
+
+Route::get('/financas/faturas-fornecedor/{fatura}/pdf', [FaturaFornecedorController::class, 'pdf'])
+    ->name('faturas-fornecedor.pdf');
 
 
 });

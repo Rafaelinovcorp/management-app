@@ -205,6 +205,29 @@ public function pdf(Encomenda $encomenda)
         ]
     );
 }
+/* =======================
+ *  EDIT
+ * ======================= */
+public function edit(Encomenda $encomenda)
+{
+    if ($encomenda->isFechado()) {
+        abort(403, 'Encomenda fechada não pode ser editada.');
+    }
+
+    $encomenda->load([
+        'entidade',
+        'linhas.artigo.iva'
+    ]);
+
+    $clientes = Entidade::clientes()->get();
+    $artigos = Artigo::with('iva')->get();
+
+    return Inertia::render('Encomendas/Edit', [
+        'encomenda' => $encomenda,
+        'clientes' => $clientes,
+        'artigos' => $artigos,
+    ]);
+}
 
 
 }
